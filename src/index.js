@@ -1,12 +1,26 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import Main from './components/main/main';
+import Register from './containers/register';
+import Login from './components/login/login';
+import {HashRouter,Route,Switch} from 'react-router-dom';
+import {Provider} from 'react-redux';
+import store from './redux/store';
+//引入公共样式
+import './assets/less/index.less';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(
+  <Provider store={store}>
+    <HashRouter>
+      <Switch>
+        <Route path="/login" component={Login}/>
+        <Route path="/register" component={Register}/>
+        {/*只要不是/login和/register就是main的地址，默认是main地址*/}
+        <Route component={Main}/>
+      </Switch>
+    </HashRouter>
+  </Provider>
+ ,
+  document.getElementById('root')
+)
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: http://bit.ly/CRA-PWA
-serviceWorker.unregister();
