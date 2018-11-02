@@ -20,15 +20,20 @@ class HeaderSelector extends Component {
   render () {
     const {icon} = this.state;
     const headerUI = icon ?<div>请选择头像<img src={icon}/></div>: '请选择头像';
-    const data = Array.from(new Array(20)).map((item, index) => ({
-      //通过require将图片资源动态加载进来
+    const data = Array.from(new Array(20)).map((item, index) => ({ //_代表私人的，只有在这用
       icon: require(`./avatars/头像${index + 1}.png`),
       text: `头像${index + 1}`,
-    }));
+  }));
+  
+    // const data = Array.from(new Array(20)).map((item, index) => ({
+    //   //通过require将图片资源动态加载进来 引入遍历 必须以./开头
+    //   icon: require(`./avatars/头像${index + 1}.png`),
+    //   text: `头像${index + 1}`,
+    // }));
   
     return (
-      <List renderHeader={() => '请选择头像'}>
-        <Grid data={data} columnNum={5}/>
+      <List renderHeader={() => headerUI }>
+        <Grid data={data} columnNum={5} onClick={this.setHeader}/>
       </List>
     )
   }
